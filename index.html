@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kunal Gaikwad | Full Stack Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a0ca3;
+      --primary-light: #4895ef;
+      --secondary: #f72585;
+      --accent: #4cc9f0;
+      --dark: #1a1a2e;
+      --darker: #16213e;
+      --light: #f8f9fa;
+      --lighter: #ffffff;
+      --gray: #6c757d;
+      --light-gray: #e9ecef;
+      --success: #38b000;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 60px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      bottom: -15px;
+      left: 0;
+      border-radius: 2px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      position: relative;
+      padding: 5px 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      bottom: 0;
+      left: 0;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    /* Hero Section */
+    #hero {
+      padding: 180px 0 100px;
+      background: linear-gradient(135deg, rgba(67, 97, 238, 0.05), rgba(247, 37, 133, 0.05));
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      transform: perspective(1000px) rotateY(-10deg);
+      transition: var(--transition);
+    }
+
+    .hero-image img:hover {
+      transform: perspective(1000px) rotateY(0deg);
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray);
+      margin-bottom: 30px;
+      max-width: 600px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--light-gray);
+      color: var(--dark);
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* About Section */
+    #about {
+      background-color: var(--lighter);
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-image img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-text p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* Skills Section */
+    #skills {
+      background-color: var(--light);
+    }
+
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .skill-category {
+      background-color: var(--lighter);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .skill-category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-category h3 {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .skill-category h3 i {
+      color: var(--primary);
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-item {
+      background-color: var(--light-gray);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .skill-item:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    /* Projects Section */
+    #projects {
+      background-color: var(--lighter);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .project-card {
+      background-color: var(--lighter);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-image {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.05);
+    }
+
+    .project-content {
+      padding: 25px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .project-description {
+      margin-bottom: 20px;
+      color: var(--gray);
+      flex: 1;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tech-item {
+      background-color: var(--light-gray);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Case Study Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      overflow-y: auto;
+      padding: 50px 20px;
+    }
+
+    .modal-content {
+      background-color: white;
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--gray);
+      z-index: 1;
+    }
+
+    .modal-header {
+      height: 300px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-header img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-body {
+      padding: 40px;
+    }
+
+    .modal-section {
+      margin-bottom: 30px;
+    }
+
+    .modal-section h3 {
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+
+    /* Contact Section */
+    #contact {
+      background-color: var(--light);
+    }
+
+    .contact-container {
+      display: flex;
+      gap: 50px;
+    }
+
+    .contact-info {
+      flex: 1;
+    }
+
+    .contact-info h3 {
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      margin-bottom: 30px;
+      max-width: 400px;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .contact-item i {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-form {
+      flex: 1;
+      background-color: var(--lighter);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--light-gray);
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--darker);
+      color: white;
+      padding: 50px 0 20px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .footer-links a {
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .footer-social a:hover {
+      background-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 100;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .hero-content,
+      .about-content,
+      .contact-container {
+        flex-direction: column;
+      }
+      
+      .hero-image,
+      .about-image {
+        margin-top: 50px;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 70px 0;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <a href="#" class="logo">Kunal<span>Gaikwad</span></a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">Hi, I'm Kunal Gaikwad</h1>
+          <h2 class="hero-subtitle">Full Stack Developer building digital solutions that make an impact</h2>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
+          </div>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/kunal-web-developer/" target="_blank" class="social-link">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/" target="_blank" class="social-link">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://thetechwriter526.hashnode.dev/" target="_blank" class="social-link">
+              <i class="fas fa-blog"></i>
+            </a>
+            <a href="https://x.com/KunalGaikw13074" target="_blank" class="social-link">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="kunal img.jpg" alt="Developer at work">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>I'm a passionate Full Stack Developer from Aurangabad, Maharashtra with expertise in building responsive, user-friendly web applications using modern technologies.</p>
+          <p>My journey in web development began with simple HTML pages and has evolved into creating complex full-stack applications. Currently interning as a Java Full Stack Developer at KP Infotech, I'm constantly expanding my skills to solve real-world problems through code.</p>
+          <p>When I'm not coding, you can find me contributing to open-source projects, writing technical blogs, or exploring new frameworks and libraries to stay at the forefront of web development.</p>
+          <div class="hero-buttons" style="margin-top: 30px;">
+           <a href="https://drive.google.com/file/d/1qOlK2JARWW4Fs1ws46p9j67lN4bKNmQg/view?usp=sharing" class="btn btn-primary" download>
+  <i class="fas fa-download"></i> Download Resume
+</a>
+          </div>
+        </div>
+        <div class="about-image">
+          <img src="kunalab.jfif" alt="About me">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">My Skills</h2>
+      <div class="skills-container">
+        <div class="skill-category">
+          <h3><i class="fas fa-code"></i> Frontend</h3>
+          <div class="skill-list">
+            <span class="skill-item">HTML5</span>
+            <span class="skill-item">CSS3</span>
+            <span class="skill-item">JavaScript</span>
+            <span class="skill-item">React</span>
+            <span class="skill-item">TypeScript</span>
+            <span class="skill-item">Tailwind CSS</span>
+            <span class="skill-item">Responsive Design</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-server"></i> Backend</h3>
+          <div class="skill-list">
+            <span class="skill-item">Java</span>
+            <span class="skill-item">Spring Boot</span>
+            <span class="skill-item">Node.js</span>
+            <span class="skill-item">Express</span>
+            <span class="skill-item">REST APIs</span>
+            <span class="skill-item">Microservices</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-database"></i> Database</h3>
+          <div class="skill-list">
+            <span class="skill-item">MySQL</span>
+            <span class="skill-item">MongoDB</span>
+            <span class="skill-item">PostgreSQL</span>
+            <span class="skill-item">Firebase</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-tools"></i> Tools & More</h3>
+          <div class="skill-list">
+            <span class="skill-item">Git</span>
+            <span class="skill-item">Docker</span>
+            <span class="skill-item">AWS</span>
+            <span class="skill-item">Agile</span>
+            <span class="skill-item">Figma</span>
+            <span class="skill-item">Problem Solving</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Student Record Manager">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Student Record Manager</h3>
+            <p class="project-description">A comprehensive system for managing student records with admin authentication, data visualization, and reporting features.</p>
+            <div class="project-tech">
+              <span class="tech-item">Java</span>
+              <span class="tech-item">Spring Boot</span>
+              <span class="tech-item">React</span>
+              <span class="tech-item">MySQL</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline" style="padding: 8px 16px;">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+              <a href="#" class="btn btn-primary" style="padding: 8px 16px;">
+                <i class="fab fa-github"></i> Code
+              </a>
+              <button class="btn btn-outline case-study-btn" style="padding: 8px 16px;" data-project="1">
+                <i class="fas fa-book-open"></i> Case Study
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Tech Blog">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Tech Blog & Resources</h3>
+            <p class="project-description">Technical blog with articles on programming concepts, focusing on C programming and modern web development.</p>
+            <div class="project-tech">
+              <span class="tech-item">Hashnode</span>
+              <span class="tech-item">Markdown</span>
+              <span class="tech-item">SEO</span>
+            </div>
+            <div class="project-links">
+              <a href="https://thetechwriter526.hashnode.dev/looping-in-c-unlocking-the-path-to-programmatic-mastery" target="_blank" class="btn btn-outline" style="padding: 8px 16px;">
+                <i class="fas fa-external-link-alt"></i> Visit Blog
+              </a>
+              <button class="btn btn-outline case-study-btn" style="padding: 8px 16px;" data-project="2">
+                <i class="fas fa-book-open"></i> Case Study
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="E-Commerce Dashboard">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">E-Commerce Dashboard</h3>
+            <p class="project-description">Admin dashboard for e-commerce platforms with real-time analytics, product management, and customer insights.</p>
+            <div class="project-tech">
+              <span class="tech-item">React</span>
+              <span class="tech-item">Node.js</span>
+              <span class="tech-item">MongoDB</span>
+              <span class="tech-item">Redux</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn btn-outline" style="padding: 8px 16px;">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+              <a href="#" class="btn btn-primary" style="padding: 8px 16px;">
+                <i class="fab fa-github"></i> Code
+              </a>
+              <button class="btn btn-outline case-study-btn" style="padding: 8px 16px;" data-project="3">
+                <i class="fas fa-book-open"></i> Case Study
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study Modals -->
+  <!-- Project 1 Modal -->
+  <div class="modal" id="modal-1">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div class="modal-header">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Student Record Manager">
+      </div>
+      <div class="modal-body">
+        <h2>Student Record Manager</h2>
+        <div class="modal-section">
+          <h3>The Challenge</h3>
+          <p>Educational institutions were struggling with manual student record management, leading to inefficiencies, errors, and difficulty in generating reports. There was a need for a centralized, secure system that could automate these processes.</p>
+        </div>
+        <div class="modal-section">
+          <h3>My Role</h3>
+          <p>As the lead developer, I designed and implemented the full-stack solution, including:</p>
+          <ul style="margin-left: 20px; margin-bottom: 20px;">
+            <li>Database schema design</li>
+            <li>Backend API development</li>
+            <li>Frontend interface</li>
+            <li>Authentication system</li>
+            <li>Report generation features</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3>Technologies Used</h3>
+          <div class="project-tech" style="margin-bottom: 20px;">
+            <span class="tech-item">Java</span>
+            <span class="tech-item">Spring Boot</span>
+            <span class="tech-item">React</span>
+            <span class="tech-item">MySQL</span>
+            <span class="tech-item">JWT Authentication</span>
+            <span class="tech-item">Chart.js</span>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3>The Solution</h3>
+          <p>I developed a comprehensive student record management system that:</p>
+          <ul style="margin-left: 20px; margin-bottom: 20px;">
+            <li>Automated student data management</li>
+            <li>Provided role-based access control</li>
+            <li>Included data visualization dashboards</li>
+            <li>Automated report generation</li>
+            <li>Reduced administrative workload by 60%</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3>Results</h3>
+          <p>The system was successfully implemented at 3 educational institutions, resulting in:</p>
+          <ul style="margin-left: 20px; margin-bottom: 20px;">
+            <li>80% reduction in record-keeping errors</li>
+            <li>50% faster report generation</li>
+            <li>Improved data security and accessibility</li>
+          </ul>
+        </div>
+        <div class="project-links">
+          <a href="#" class="btn btn-outline">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+          <a href="#" class="btn btn-primary">
+            <i class="fab fa-github"></i> View Code
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 2 Modal -->
+  <div class="modal" id="modal-2">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div class="modal-header">
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Tech Blog">
+      </div>
+      <div class="modal-body">
+        <h2>Tech Blog & Resources</h2>
+        <div class="modal-section">
+          <h3>The Challenge</h3>
+          <p>Many beginners struggle with understanding fundamental programming concepts. Existing resources were either too complex or lacked practical examples.</p>
+        </div>
+        <div class="modal-section">
+          <h3>My Role</h3>
+          <p>As the sole creator, I:</p>
+          <ul style="margin-left: 20px; margin-bottom: 20px;">
+            <li>Researched and identified knowledge gaps</li>
+            <li>Created comprehensive tutorials</li>
+            <li>Developed practical examples</li>
+            <li>Optimized content for SEO</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3>Technologies Used</h3>
+          <div class="project-tech" style="margin-bottom: 20px;">
+            <span class="tech-item">Hashnode</span>
+            <span class="tech-item">Markdown</span>
+            <span class="tech-item">SEO</span>
+            <span class="tech-item">Technical Writing</span>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3>The Solution</h3>
+          <p>I created a technical blog focusing on:</p>
+          <ul style="margin-left: 20px; margin-bottom: 20px;">
+            <li>C programming fundamentals</li>
+            <li>Modern web development techniques</li>
+            <li>Practical examples and code snippets</li>
+            <li>Beginner-friendly explanations</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3>Results</h3>
+          <p>The blog has achieved:</p>
+          <ul style="margin-left: 20px; margin-bottom: 20px;">
+            <li>5,000+ monthly readers</li>
+            <li>Featured in Hashnode's top technical blogs</li>
+            <li>Helped 100+ beginners learn programming</li>
+          </ul>
+        </div>
+        <div class="project-links">
+          <a href="https://thetechwriter526.hashnode.dev/looping-in-c-unlocking-the-path-to-programmatic-mastery" target="_blank" class="btn btn-outline">
+            <i class="fas fa-external-link-alt"></i> Visit Blog
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 3 Modal -->
+  <div class="modal" id="modal-3">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div class="modal-header">
+        <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="E-Commerce Dashboard">
+      </div>
+      <div class="modal-body">
+        <h2>E-Commerce Dashboard</h2>
+        <div class="modal-section">
+          <h3>The Challenge</h3>
+          <p>Small e-commerce businesses lacked affordable, customizable dashboards to track their performance metrics and manage inventory effectively.</p>
+        </div>
+        <div class="modal-section">
+          <h3>My Role</h3>
+          <p>As the frontend lead, I:</p>
+          <ul style="margin-left: 20px; margin-bottom: 20px;">
+            <li>Designed the UI/UX</li>
+            <li>Implemented data visualization</li>
+            <li>Developed the admin interface</li>
+            <li>Integrated with backend APIs</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3>Technologies Used</h3>
+          <div class="project-tech" style="margin-bottom: 20px;">
+            <span class="tech-item">React</span>
+            <span class="tech-item">Node.js</span>
+            <span class="tech-item">MongoDB</span>
+            <span class="tech-item">Redux</span>
+            <span class="tech-item">Chart.js</span>
+            <span class="tech-item">JWT</span>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3>The Solution</h3>
+          <p>I developed an admin dashboard that provides:</p>
+          <ul style="margin-left: 20px; margin-bottom: 20px;">
+            <li>Real-time sales analytics</li>
+            <li>Product management</li>
+            <li>Customer insights</li>
+            <li>Inventory tracking</li>
+            <li>Responsive design</li>
+          </ul>
+        </div>
+        <div class="modal-section">
+          <h3>Results</h3>
+          <p>The dashboard has helped businesses:</p>
+          <ul style="margin-left: 20px; margin-bottom: 20px;">
+            <li>Increase sales by 25% through better insights</li>
+            <li>Reduce inventory management time by 40%</li>
+            <li>Improve customer retention through analytics</li>
+          </ul>
+        </div>
+        <div class="project-links">
+          <a href="#" class="btn btn-outline">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+          <a href="#" class="btn btn-primary">
+            <i class="fab fa-github"></i> View Code
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>Let's Connect</h3>
+          <p>I'm currently looking for new opportunities and would love to hear from you. Whether you have a question or just want to say hi, I'll do my best to get back to you!</p>
+          <div class="contact-details">
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <h4>Email</h4>
+                <p>gaikwadkunal526@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <h4>Location</h4>
+                <p>Aurangabad, Maharashtra, India</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone-alt"></i>
+              <div>
+                <h4>Phone</h4>
+                <p>+91 9373529606</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">Kunal<span>Gaikwad</span></div>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/kunal-web-developer/" target="_blank">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com/" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://thetechwriter526.hashnode.dev/" target="_blank">
+            <i class="fas fa-blog"></i>
+          </a>
+          <a href="https://twitter.com/" target="_blank">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        <p class="copyright">© 2023 Kunal Gaikwad. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          navLinks.style.display = 'none';
+        }
+      });
+    });
+    
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+    
+    // Case Study Modals
+    const caseStudyBtns = document.querySelectorAll('.case-study-btn');
+    const modals = document.querySelectorAll('.modal');
+    const closeBtns = document.querySelectorAll('.modal-close');
+    
+    caseStudyBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const projectId = btn.getAttribute('data-project');
+        document.getElementById(`modal-${projectId}`).style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    
+    closeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+      });
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal')) {
+        e.target.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+    
+    // Form Submission
+    const contactForm = document.getElementById('contactForm');
+    
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you soon.');
+        contactForm.reset();
+      });
+    }
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Responsive adjustments
+    function handleResize() {
+      if (window.innerWidth > 768) {
+        navLinks.style.display = 'flex';
+      } else {
+        navLinks.style.display = 'none';
+      }
+    }
+    
+    window.addEventListener('resize', handleResize);
+    handleResize();
+  </script>
+</body>
+</html>
